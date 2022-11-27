@@ -27,7 +27,7 @@ def get_user_messages(user: User = Depends(get_current_user), message_s: Message
             openapi_extra={
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "name": "message_id",
                         "schema": {
                             "type": "integer"
@@ -63,7 +63,7 @@ def view_message_by_id(message_id: int, request: Request, user: User = Depends(g
             openapi_extra={
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "name": "message_id",
                         "schema": {
                             "type": "integer"
@@ -98,7 +98,7 @@ def post_message(data: CreateMessageRequest, user: User = Depends(get_current_us
                openapi_extra={
                    "parameters": [
                        {
-                           "in": "query",
+                           "in": "path",
                            "name": "message_id",
                            "schema": {
                                "type": "integer"
