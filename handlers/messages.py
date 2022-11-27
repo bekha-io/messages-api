@@ -24,18 +24,6 @@ def get_user_messages(user: User = Depends(get_current_user), message_s: Message
 
 @router.get('/view/{message_id}', response_class=HTMLResponse,
             summary="View message page",
-            openapi_extra={
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "message_id",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "description": "ID сообщения"
-                    }
-                ]
-            },
             responses={
                 status.HTTP_404_NOT_FOUND: {'class': HTMLResponse}
             })
@@ -60,18 +48,6 @@ def view_message_by_id(message_id: int, request: Request, user: User = Depends(g
 @router.get("/{message_id}", response_model=MessageResponse, response_model_exclude_none=True,
             summary="Get message",
             status_code=status.HTTP_200_OK,
-            openapi_extra={
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "message_id",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "description": "ID сообщения"
-                    }
-                ]
-            },
             responses={status.HTTP_404_NOT_FOUND: MESSAGE_NOT_FOUND.schema()})
 def get_message_by_id(message_id: int, message_s: MessageService = Depends(MessageService)):
     """Возвращает сообщение по его ID (200). Если сообщение с таким ID не найдено, возвращает ошибку (404).
@@ -95,18 +71,6 @@ def post_message(data: CreateMessageRequest, user: User = Depends(get_current_us
 
 @router.delete('/{message_id}', response_model=Message, summary="Delete message",
                status_code=status.HTTP_200_OK,
-               openapi_extra={
-                   "parameters": [
-                       {
-                           "in": "path",
-                           "name": "message_id",
-                           "schema": {
-                               "type": "integer"
-                           },
-                           "description": "ID сообщения"
-                       }
-                   ]
-               },
                responses={
                    status.HTTP_403_FORBIDDEN: NOT_MESSAGE_AUTHOR.schema(),
                    status.HTTP_404_NOT_FOUND: MESSAGE_NOT_FOUND.schema()
