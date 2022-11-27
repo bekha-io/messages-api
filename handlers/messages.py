@@ -14,7 +14,7 @@ router = APIRouter(prefix='/messages', responses={
 templates = Jinja2Templates(directory="templates")
 
 
-@router.get("/", response_model=MessagesListResponse, summary="Get all user's messages",
+@router.get("", response_model=MessagesListResponse, summary="Get all user's messages",
             response_model_exclude_none=True)
 def get_user_messages(user: User = Depends(get_current_user), message_s: MessageService = Depends(MessageService)):
     """Возвращает все сообщения, опубликованные контекстным пользователем и
@@ -82,7 +82,7 @@ def get_message_by_id(message_id: int, message_s: MessageService = Depends(Messa
     raise MESSAGE_NOT_FOUND
 
 
-@router.post("/", response_model=MessageResponse, response_model_exclude_none=True,
+@router.post("", response_model=MessageResponse, response_model_exclude_none=True,
              summary="Post new message")
 def post_message(data: CreateMessageRequest, user: User = Depends(get_current_user),
                  message_s: MessageService = Depends(MessageService)):
