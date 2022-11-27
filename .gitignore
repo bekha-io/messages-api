@@ -3,3 +3,6 @@ database.db
 .idea/**
 *__pycache__
 config.py
+**access_log
+**error_log
+logs/
