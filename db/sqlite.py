@@ -45,7 +45,7 @@ class Database:
         except sqlite3.Error as e:
             print("Error connecting to database! Error: ", e.__str__())
 
-    def fetch(self, query: str, many: bool = False) -> typing.Union[list[dict], dict, None]:
+    def fetch(self, query: str, many: bool = False) -> typing.Union[typing.List[dict], dict, None]:
         with self:
             self.cursor.execute(query)
             tx = self.cursor.fetchone() if not many else self.cursor.fetchall()
