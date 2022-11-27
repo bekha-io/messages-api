@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from models.user import CreateUserRequest, UserResponse, TokenPair, SignInRequest, RefreshTokenRequest
-from services.user import UserService
+from services.users import UserService
 from handlers.exceptions import *
 
 router = APIRouter(prefix='/users')

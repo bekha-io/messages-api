@@ -45,15 +45,16 @@ class Database:
         except sqlite3.Error as e:
             print("Error connecting to database! Error: ", e.__str__())
 
-    def fetch(self, query: str, many: bool = False) -> typing.Union[typing.List[dict], dict, None]:
+    def fetch(self, query: str, parameters: typing.Iterable = None, many: bool = False) -> typing.Union[
+        typing.List[dict], dict, None]:
         with self:
-            self.cursor.execute(query)
+            self.cursor.execute(query, parameters)
             tx = self.cursor.fetchone() if not many else self.cursor.fetchall()
             return tx
 
-    def execute(self, query: str, parameters: typing.Iterable = None):
+    def execute(self, query: str, parameters: typing.Iterable = None) -> sqlite3.Cursor:
         with self:
-            self.cursor.execute(query, parameters)
+            return self.cursor.execute(query, parameters)
 
     def __enter__(self):
         self.cursor = self.conn.cursor()

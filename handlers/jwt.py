@@ -3,7 +3,7 @@ from fastapi import Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 import config
-from services.user import UserService
+from services.users import UserService
 from handlers.exceptions import NOT_AUTHENTICATED
 
 

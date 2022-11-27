@@ -13,7 +13,7 @@ from utils import check_password
 class UserService(AbstractService):
     def get_by_pk(self, pk: UUID) -> typing.Optional[User]:
         with Database() as db:
-            r = db.fetch("SELECT * FROM users WHERE uuid ='%s'" % (pk.__str__(),))
+            r = db.fetch("SELECT * FROM users WHERE uuid =?", (pk.__str__(),))
             if r:
                 return User(**r)
 
@@ -26,7 +26,7 @@ class UserService(AbstractService):
     def get_user_by_username(username: str) -> typing.Optional[User]:
         with Database() as db:
             r = db.fetch(
-                "SELECT * FROM users WHERE username='%s'" % (username,)
+                "SELECT * FROM users WHERE username=?", (username,)
             )
             if r:
                 return User(**r)
@@ -41,10 +41,8 @@ class UserService(AbstractService):
                     "access_token, refresh_token, created_at) VALUES (?, ?, ?, ?, ?, ?)",
                     (data.uuid.__str__(), data.username, data.password_confirm,
                      self.__get_new_access_token(data.uuid), self.__get_new_refresh_token(data.uuid),
-                     data.created_at)
-                )
-                r = db.fetch("SELECT * FROM users WHERE username='%s'" % data.username)
-                print(r)
+                     data.created_at))
+                r = db.fetch("SELECT * FROM users WHERE username=?", (data.username, ))
                 if r:
                     return User(**r)
 
@@ -73,7 +71,7 @@ class UserService(AbstractService):
     def new_token_pair_via_refresh_token(self, refresh_token: str) -> typing.Optional[TokenPair]:
         with Database() as db:
             r = db.fetch(
-                "SELECT * FROM users WHERE refresh_token = '%s'" % refresh_token,
+                "SELECT * FROM users WHERE refresh_token=?", (refresh_token,),
             )
             if r:
                 u = User(**r)
