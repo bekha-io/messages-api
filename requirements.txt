@@ -1,0 +1,5 @@
+fastapi==0.87.0
+pydantic==1.10.2
+python_bcrypt==0.3.2
+regex==2022.4.24
+requests==2.27.1

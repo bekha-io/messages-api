@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр сообщения</title>
+</head>
+
+<style>
+    body {
+        font-family: "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: nowrap;
+        align-items: center;
+        min-height: 90vh;
+    }
+
+    .message {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 25px;
+        border: whitesmoke 2px solid;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 7px;
+        align-content: flex-start;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .msg-header {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .msg-text {
+        font-size: 16px;
+    }
+
+    .msg-meta {
+        margin-top: 7px;
+        font-size: 12px;
+        font-style: italic;
+        color: lightgrey;
+    }
+</style>
+<body>
+{% block body %}
+{% endblock %}
+</body>
+</html>

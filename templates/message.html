@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    {% if message and author %}
+        <div class="message">
+            <div class="msg-header">{{ author.username }}</div>
+            <div class="msg-text">{{ message.text }}</div>
+            <div class="msg-meta">{{ message.published_at.strftime('%d.%m.%Y в %H:%M:%S') }}</div>
+        </div>
+    {% endif %}
+{% endblock %}
