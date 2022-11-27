@@ -50,4 +50,5 @@ class MessageService(AbstractService):
                 "SELECT * FROM messages WHERE user_uuid=? ORDER BY published_at DESC ", (user_uuid.__str__(),),
                 many=True
             )
-            return MessagesListResponse(messages=[MessageResponse(**m) for m in r], count=len(r))
+            not_deleted = [MessageResponse(**m) for m in r if not m["deleted_at"]]
+            return MessagesListResponse(messages=not_deleted, count=len(not_deleted))
